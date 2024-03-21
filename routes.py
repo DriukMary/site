@@ -2,17 +2,23 @@ from flask import Flask, render_template, request, session, url_for, redirect, m
 from models import User
 from imports import db, mail, app
 from flask_mail import Message
+from werkzeug.utils import secure_filename
+from flask import request
 
 
-@app.route('/mail', methods=['GET'])
+@app.route('/mail', methods=['GET', 'POST'])
 def mail_1():
-    msg = Message(
-        subject='Registration letter',
-        sender='noreply@employer.com',
-        recipients=['wfe@wef.wef']
-    )
-    msg.html = 'wef'
-    mail.send(msg)
+    if request.method == 'POST':
+        msg = Message(
+            subject='Registration letter',
+            sender='noreply@employer.com',
+            recipients=['wfe@wef.wef']
+        )
+        msg.html = 'wef'
+        mail.send(msg)
+        return 'Mail sent successfully'
+
+    return 'This endpoint only accepts POST requests'
 
 
 @app.route('/')
@@ -20,7 +26,7 @@ def index():
     return str(session.get('user_id', 'Please, you must login !!!'))
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         email = request.form['email']
@@ -39,7 +45,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -60,3 +66,6 @@ def login():
     return render_template('login.html')
 
 
+@app.route('/template')
+def show_template():
+    return render_template('index.html')
