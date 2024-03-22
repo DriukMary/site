@@ -40,7 +40,16 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return 'no problem'
+        msg = Message(
+            subject='Registration Confirmation',
+            sender='noreply@employer.com',
+            recipients=[email]
+        )
+        msg.html = 'Dear {}, <br><br> Thank you for registering with us! Your registration was successful.'.format(
+            email)
+        mail.send(msg)
+
+        return 'Registration successful. Confirmation email sent.'
 
     return render_template('register.html')
 
