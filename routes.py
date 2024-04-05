@@ -6,21 +6,6 @@ from werkzeug.utils import secure_filename
 from flask import request
 
 
-@app.route('/mail', methods=['GET', 'POST'])
-def mail_1():
-    if request.method == 'POST':
-        msg = Message(
-            subject='Registration letter',
-            sender='noreply@employer.com',
-            recipients=['wfe@wef.wef']
-        )
-        msg.html = 'wef'
-        mail.send(msg)
-        return 'Mail sent successfully'
-
-    return 'This endpoint only accepts POST requests'
-
-
 @app.route('/')
 def index():
     return str(session.get('user_id', 'Please, you must login !!!'))
@@ -43,9 +28,9 @@ def register():
         msg = Message(
             subject='Registration Confirmation',
             sender='noreply@employer.com',
-            recipients=[email]
+            recipients=['wfe@wef.wef']
         )
-        msg.html = 'Dear {}, <br><br> Thank you for registering with us! Your registration was successful.'.format(
+        msg.html = 'Dear client {}, <br><br> Thank you for registering with us! Your registration was successful.'.format(
             email)
         mail.send(msg)
 
