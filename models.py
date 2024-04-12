@@ -26,6 +26,7 @@ class Position(db.Model):
     name = db.Column(db.String(64), unique=True)
     price = db.Column(db.Float)
     weight = db.Column(db.Integer)
+    img = db.Column(db.String(255))
     orders = relationship('Order', backref='position')
 
 

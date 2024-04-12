@@ -115,46 +115,31 @@
                 <h2 class="bg-white tm-text-brown py-6 px-12 text-4xl font-medium inline-block rounded-md">Our Cafe Menu</h2>
             </div>
             <div class="flex flex-col lg:flex-row justify-around items-center">
-
-                {% for product in products %}
-
-                    <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
-                        <div class="flex items-start mb-6 tm-menu-item">
-                            <img src="{{ url_for('static', filename=product.img) }}" alt="Image" class="rounded-md">
-                            <div class="ml-3 sm:ml-6">
-                                <h3 class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow">{{ product.title }}</h3>
-                                <div class="text-white text-md sm:text-lg font-light mb-1">{{ product.size }} ${{ product.price }}</div>
-                            </div>
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+                {% for product in products_col_1 %}
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="{{ url_for('static', filename=product.img) }}" alt="Image" class="rounded-md">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow">{{product.name}}</h3>
+                            <div class="text-white text-md sm:text-lg font-light mb-1">{{product.size}} ${{product.price}}</div>
                         </div>
                     </div>
                 {% endfor %}
-            </div>
-
-            <div class="flex justify-center mt-10">
-                <div class="flex rounded-md bg-white shadow">
-                    {% if products.has_prev %}
-                        <a href="{{ url_for('menu', page=products.prev_num) }}" class="py-2 px-4 block hover:bg-gray-200 transition">Previous</a>
-                    {% else %}
-                        <span class="py-2 px-4 block cursor-not-allowed opacity-50">Previous</span>
-                    {% endif %}
-                    {% for page in products.iter_pages() %}
-                        {% if page %}
-                            {% if page != products.page %}
-                                <a href="{{ url_for('menu', page=page) }}" class="py-2 px-4 block hover:bg-gray-200 transition">{{ page }}</a>
-                            {% else %}
-                                <span class="py-2 px-4 block bg-gray-200">{{ page }}</span>
-                            {% endif %}
-                        {% else %}
-                            <span class="py-2 px-4 block">...</span>
-                        {% endif %}
-                    {% endfor %}
-                    {% if products.has_next %}
-                        <a href="{{ url_for('menu', page=products.next_num) }}" class="py-2 px-4 block hover:bg-gray-200 transition">Next</a>
-                    {% else %}
-                        <span class="py-2 px-4 block cursor-not-allowed opacity-50">Next</span>
-                    {% endif %}
+                </div>
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+                {% for product in products_col_2 %}
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <img src="{{ url_for('static', filename=product.img) }}" alt="Image" class="rounded-md">
+                        <div class="ml-3 sm:ml-6">
+                            <h3 class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow">{{product.name}}</h3>
+                            <div class="text-white text-md sm:text-lg font-light mb-1">{{product.size}} ${{product.price}}</div>
+                        </div>
+                    </div>
+                {% endfor %}
                 </div>
             </div>
+
+
         </div>
     </div>
 

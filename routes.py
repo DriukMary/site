@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, url_for, redirect, make_response
-from models import User
+from models import User, Position
 from imports import db, mail, app
 from flask_mail import Message
 from werkzeug.utils import secure_filename
@@ -7,8 +7,11 @@ from flask import request
 
 
 @app.route('/')
-def index():
-    return str(session.get('user_id', 'Please, you must login !!!'))
+def main():
+    products_col_1 = Position.query.paginate(page=1, per_page=4)
+    products_col_2 = Position.query.paginate(page=2, per_page=4)
+
+    return Position.guery.all()
 
 
 @app.route('/register', methods=['GET', 'POST'])
