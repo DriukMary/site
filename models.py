@@ -3,9 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_migrate import Migrate
-
-db = SQLAlchemy()
-migrate = Migrate()
+from imports import db
 
 
 class User(db.Model):

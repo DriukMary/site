@@ -11,7 +11,11 @@ def main():
     products_col_1 = Position.query.paginate(page=1, per_page=4)
     products_col_2 = Position.query.paginate(page=2, per_page=4)
 
-    return Position.guery.all()
+    return render_template(
+        'index.html',
+        products_col_1=products_col_1,
+        products_col_2=products_col_2
+    )
 
 
 @app.route('/register', methods=['GET', 'POST'])
